@@ -1,8 +1,10 @@
-## Cali 个人博客网站
+## luckySnail 个人博客
 
-Cali 的个人博客网站 [https://cali.so/](https://cali.so/) 的源代码。
+luckySnail 的个人博客网站 [https://luckysnail.cn/](https://luckysnail.cn/) 。
 
-需要其他服务商的环境变量才能正常运行，所以如果你想要在本地运行，需要自己配置。
+需要其他服务商的环境变量才能正常运行，所以如果你想要在本地运行，需要自己配置。参考文档：
+
+1. [如何复刻本网站，零氪快速建博客](https://cali.so/blog/guide-for-cloning-my-site)
 
 可查看 `.env.example` 文件，里面包含了所有需要的环境变量。
 
