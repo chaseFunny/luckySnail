@@ -1,18 +1,18 @@
 import RSS from 'rss'
 
-import { seo } from '~/lib/seo'
+import { siteConfig } from '~/config/siteMetadata'
 import { getLatestBlogPosts } from '~/sanity/queries'
 
 export const revalidate = 60 * 60 // 1 hour
 
 export async function GET() {
   const feed = new RSS({
-    title: seo.title,
-    description: seo.description,
-    site_url: seo.url.href,
-    feed_url: `${seo.url.href}feed.xml`,
-    language: 'zh-CN',
-    image_url: `${seo.url.href}opengraph-image.png`,
+    title: siteConfig.authors + siteConfig.name,
+    description: siteConfig.description,
+    site_url: siteConfig.url,
+    feed_url: `${siteConfig.url}feed.xml`,
+    language: siteConfig.locale,
+    image_url: `${siteConfig.url}opengraph-image.webp`,
     generator: 'PHP 9.0',
   })
 
@@ -25,7 +25,7 @@ export async function GET() {
     feed.item({
       title: post.title,
       guid: post._id,
-      url: `${seo.url.href}blog/${post.slug}`,
+      url: `${siteConfig.url}blog/${post.slug}`,
       description: post.description,
       date: new Date(post.publishedAt),
       enclosure: {

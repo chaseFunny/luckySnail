@@ -2,6 +2,7 @@ import * as cheerio from 'cheerio'
 import { ImageResponse } from 'next/og'
 import { type NextRequest, NextResponse } from 'next/server'
 
+import { siteConfig } from '~/config/siteMetadata'
 import { ratelimit, redis } from '~/lib/redis'
 
 export const runtime = 'edge'
@@ -13,13 +14,13 @@ function getKey(url: string) {
 
 const faviconMapper: { [key: string]: string } = {
   '((?:zolplay.cn)|(?:zolplay.com)|(?:cn.zolplay.com))':
-    'https://cali.so/favicons/zolplay.png',
-  '(?:github.com)': 'https://cali.so/favicons/github.png',
+    siteConfig.url + 'favicons/zolplay.png',
+  '(?:github.com)': siteConfig.url + 'favicons/github.png',
   '((?:t.co)|(?:twitter.com)|(?:x.com))':
-    'https://cali.so/favicons/twitter.png',
-  'coolshell.cn': 'https://cali.so/favicons/coolshell.png',
-  'vercel.com': 'https://cali.so/favicons/vercel.png',
-  'nextjs.org': 'https://cali.so/favicons/nextjs.png',
+    siteConfig.url + 'favicons/twitter.png',
+  'coolshell.cn': siteConfig.url + 'favicons/coolshell.png',
+  'vercel.com': siteConfig.url + 'favicons/vercel.png',
+  'nextjs.org': siteConfig.url + 'favicons/nextjs.png',
 }
 
 function getPredefinedIconForUrl(url: string): string | undefined {
@@ -63,7 +64,7 @@ export async function GET(req: NextRequest) {
     return NextResponse.error()
   }
 
-  let iconUrl = 'https://cali.so/favicon_blank.png'
+  let iconUrl = siteConfig.url + 'favicon_blank.png'
 
   try {
     const predefinedIcon = getPredefinedIconForUrl(url)

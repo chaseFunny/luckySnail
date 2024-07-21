@@ -1,5 +1,7 @@
 import * as React from 'react'
 
+import { siteConfig } from '~/config/siteMetadata'
+
 import { emailConfig } from '../config/email'
 import {
   Body,
@@ -36,46 +38,43 @@ export default function Layout({
             <Hr className="mx-0 my-[20px] h-px w-full bg-zinc-100" />
             <Section>
               <Img
-                src={`${emailConfig.baseUrl}/icon.png`}
+                src={`${emailConfig.baseUrl}/icon.jpg`}
                 width="24"
                 height="24"
-                alt="Cali"
+                alt={siteConfig.authorsCN}
                 className="mx-auto my-0"
               />
               <Text className="text-center">
-                <Link
-                  href="https://cali.so"
-                  className="text-zinc-700 underline"
-                >
-                  <strong>Cali Castle</strong>
+                <Link href={siteConfig.url} className="text-zinc-700 underline">
+                  <strong>{siteConfig.authorsCN}</strong>
                 </Link>
                 <br />
-                开发者、设计师、细节控、创始人
+                {siteConfig.authors + siteConfig.name}
               </Text>
               <Text className="text-center">
                 <Link
-                  href="https://cali.so/twitter"
+                  href={siteConfig.url + 'twitter'}
                   className="text-xs text-zinc-600 underline"
                 >
                   Twitter
-                </Link>{' '}
+                </Link>
                 |&nbsp;
                 <Link
-                  href="https://cali.so/youtube"
+                  href={siteConfig.url + 'youtube'}
                   className="text-xs text-zinc-600 underline"
                 >
                   YouTube
-                </Link>{' '}
+                </Link>
                 |&nbsp;
                 <Link
-                  href="https://cali.so/github"
+                  href={siteConfig.url + '/github'}
                   className="text-xs text-zinc-600 underline"
                 >
                   GitHub
-                </Link>{' '}
+                </Link>
                 |&nbsp;
                 <Link
-                  href="https://cali.so/bilibili"
+                  href={siteConfig.url + '/bilibili'}
                   className="text-xs text-zinc-600 underline"
                 >
                   哔哩哔哩

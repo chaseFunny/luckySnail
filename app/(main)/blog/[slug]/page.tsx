@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation'
 
 import { BlogPostPage } from '~/app/(main)/blog/BlogPostPage'
 import { kvKeys } from '~/config/kv'
+import { siteConfig } from '~/config/siteMetadata'
 import { env } from '~/env.mjs'
 import { url } from '~/lib'
 import { redis } from '~/lib/redis'
@@ -42,8 +43,8 @@ export const generateMetadata = async ({
       title,
       description,
       card: 'summary_large_image',
-      site: '@thecalicastle',
-      creator: '@thecalicastle',
+      site: siteConfig.twitter.creator,
+      creator: siteConfig.twitter.creator,
     },
   } satisfies Metadata
 }

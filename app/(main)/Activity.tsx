@@ -6,6 +6,7 @@ import React from 'react'
 import { useQuery } from 'react-query'
 
 import { Tooltip } from '~/components/ui/Tooltip'
+import { siteConfig } from '~/config/siteMetadata'
 
 const appLabels: { [app: string]: string } = {
   slack: 'Slack',
@@ -30,6 +31,7 @@ const appLabels: { [app: string]: string } = {
   resolve: 'DaVinci Resolve',
 }
 export function Activity() {
+  const hostname = new URL(window.location.href).hostname
   const { data } = useQuery<{ app: string }>(
     'activity',
     () => fetch('/api/activity').then((res) => res.json()),
@@ -38,7 +40,7 @@ export function Activity() {
       enabled:
         typeof window === 'undefined'
           ? false
-          : new URL(window.location.href).hostname === 'cali.so',
+          : siteConfig.siteHostList.includes(hostname),
     }
   )
   const [open, setOpen] = React.useState(false)
@@ -79,12 +81,12 @@ export function Activity() {
             <Tooltip.Portal forceMount>
               <Tooltip.Content asChild>
                 <motion.div
-                    className="mt-1"
+                  className="mt-1"
                   initial={{ opacity: 0, scale: 0.96 }}
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0, scale: 0.95 }}
                 >
-                  Cali 在使用 {appLabels[app] ?? app}
+                  {siteConfig.authorsCN} 在使用 {appLabels[app] ?? app}
                 </motion.div>
               </Tooltip.Content>
             </Tooltip.Portal>

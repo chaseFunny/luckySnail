@@ -4,6 +4,7 @@ import { type NextRequest, NextResponse } from 'next/server'
 import { z } from 'zod'
 
 import { emailConfig } from '~/config/email'
+import { siteConfig } from '~/config/siteMetadata'
 import { db } from '~/db'
 import { subscribers } from '~/db/schema'
 import ConfirmSubscriptionEmail from '~/emails/ConfirmSubscription'
@@ -50,7 +51,7 @@ export async function POST(req: NextRequest) {
       await resend.emails.send({
         from: emailConfig.from,
         to: parsed.email,
-        subject: '来自 Cali 的订阅确认',
+        subject: `来自 ${siteConfig.authorsCN} 的订阅确认`,
         react: ConfirmSubscriptionEmail({
           link: url(`confirm/${token}`).href,
         }),

@@ -1,3 +1,5 @@
+import { siteConfig } from '~/config/siteMetadata'
+
 const commonTexts = {
   signIn: {
     phoneCode: {
@@ -11,7 +13,7 @@ const commonTexts = {
 } as const
 
 export const zhCN = {
-  locale: 'zh-CN',
+  locale: siteConfig.locale,
   socialButtonsBlockButton: '使用 {{provider|titleize}} 登录',
   dividerText: '或者',
   formFieldLabel__emailAddress: '电子邮件地址',

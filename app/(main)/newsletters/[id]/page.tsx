@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation'
 import { ReactMarkdown } from 'react-markdown/lib/react-markdown'
 
 import { Container } from '~/components/ui/Container'
+import { siteConfig } from '~/config/siteMetadata'
 import { db } from '~/db'
 import { newsletters } from '~/db/schema'
 
@@ -45,8 +46,8 @@ export async function generateMetadata({ params }: { params: { id: string } }) {
       title: newsletter.subject ?? '',
       description: newsletter.subject ?? '',
       images: imageUrl ? [{ url: imageUrl }] : undefined,
-      site: '@thecalicastle',
-      creator: '@thecalicastle',
+      site: siteConfig.twitter.creator,
+      creator: siteConfig.twitter.creator,
     },
   } satisfies Metadata
 }

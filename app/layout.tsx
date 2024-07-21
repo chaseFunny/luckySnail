@@ -1,24 +1,24 @@
-import './globals.css'
 import './clerk.css'
+import './globals.css'
 import './prism.css'
 
 import { ClerkProvider } from '@clerk/nextjs'
 import type { Metadata, Viewport } from 'next'
 
 import { ThemeProvider } from '~/app/(main)/ThemeProvider'
+import { siteConfig } from '~/config/siteMetadata'
 import { url } from '~/lib'
 import { zhCN } from '~/lib/clerkLocalizations'
 import { sansFont } from '~/lib/font'
-import { seo } from '~/lib/seo'
 
 export const metadata: Metadata = {
-  metadataBase: seo.url,
+  metadataBase: new URL(siteConfig.url),
   title: {
-    template: '%s | Cali Castle',
-    default: seo.title,
+    template: '%s | ' + siteConfig.authors,
+    default: siteConfig.authorsCN,
   },
-  description: seo.description,
-  keywords: 'Cali,Cali Castle,郭晓楠,佐玩,创始人,CEO,开发者,设计师,细节控,创新',
+  description: siteConfig.description,
+  keywords: siteConfig.keywords.join(','),
   manifest: '/site.webmanifest',
   robots: {
     index: true,
@@ -31,24 +31,8 @@ export const metadata: Metadata = {
       'max-snippet': -1,
     },
   },
-  openGraph: {
-    title: {
-      default: seo.title,
-      template: '%s | Cali Castle',
-    },
-    description: seo.description,
-    siteName: 'Cali Castle',
-    locale: 'zh_CN',
-    type: 'website',
-    url: 'https://cali.so',
-  },
-  twitter: {
-    site: '@thecalicastle',
-    creator: '@thecalicastle',
-    card: 'summary_large_image',
-    title: seo.title,
-    description: seo.description,
-  },
+  openGraph: siteConfig.openGraph,
+  twitter: siteConfig.twitter,
   alternates: {
     canonical: url('/'),
     types: {
@@ -58,10 +42,7 @@ export const metadata: Metadata = {
 }
 
 export const viewport: Viewport = {
-  themeColor: [
-    { media: '(prefers-color-scheme: dark)', color: '#000212' },
-    { media: '(prefers-color-scheme: light)', color: '#fafafa' },
-  ],
+  themeColor: siteConfig.themeColors,
 }
 
 export default function RootLayout({
@@ -72,7 +53,7 @@ export default function RootLayout({
   return (
     <ClerkProvider localization={zhCN}>
       <html
-        lang="zh-CN"
+        lang={siteConfig.locale}
         className={`${sansFont.variable} m-0 h-full p-0 font-sans antialiased`}
         suppressHydrationWarning
       >
