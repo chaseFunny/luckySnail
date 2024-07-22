@@ -21,6 +21,7 @@ export type socialItem = {
   href: string
   isPicture?: boolean
 }
+export type moreItem = Record<string, navigationItem[]>
 export type SiteConfig = {
   name: string
   authorsCN: string
@@ -34,6 +35,7 @@ export type SiteConfig = {
   ogImage: string
   social: socialItem[]
   navigationItems: navigationItem[]
+  moreItems: moreItem
   footerItems: navigationItem[]
   footerProducts: ProductLink[]
   metadataBase: URL | string

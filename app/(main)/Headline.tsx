@@ -3,7 +3,7 @@
 import { motion } from 'framer-motion'
 import Balancer from 'react-wrap-balancer'
 
-import { SparkleIcon, UserSecurityIcon } from '~/assets'
+import { SnailIcon, SparkleIcon } from '~/assets'
 import { SocialLink } from '~/components/links/SocialLink'
 import { siteConfig } from '~/config/siteMetadata'
 
@@ -43,7 +43,7 @@ function OCD() {
 function Founder() {
   return (
     <span className="group inline-flex items-center">
-      <UserSecurityIcon className="mr-1 inline-flex group-hover:fill-zinc-600/20 dark:group-hover:fill-zinc-200/20" />
+      <SnailIcon className="mr-1 inline-flex group-hover:fill-zinc-600/20 dark:group-hover:fill-zinc-200/20" />
       <span>努力进步中</span>
     </span>
   )
@@ -53,7 +53,7 @@ export function Headline() {
   return (
     <div className="max-w-3xl">
       <motion.h1
-        className="text-4xl font-bold tracking-tight text-zinc-800 dark:text-zinc-100 sm:text-5xl"
+        className="xs:text-3xl font-bold tracking-tight text-zinc-800 dark:text-zinc-100 sm:text-4xl lg:text-5xl "
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{
@@ -79,9 +79,7 @@ export function Headline() {
           delay: 0.1,
         }}
       >
-        <Balancer>
-          我是 {siteConfig.authorsCN}，{siteConfig.description}
-        </Balancer>
+        <Balancer>{siteConfig.description}</Balancer>
       </motion.p>
       <motion.div
         className="mt-6 flex gap-6"

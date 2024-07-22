@@ -1,34 +1,78 @@
 'use client'
-
-import { Popover, type PopoverProps, Transition } from '@headlessui/react'
+import {
+  Menu,
+  MenuButton,
+  MenuItem,
+  MenuItems,
+  Popover,
+  type PopoverProps,
+  Transition,
+} from '@headlessui/react'
 import { clsxm } from '@zolplay/utils'
 import { motion, useMotionTemplate, useMotionValue } from 'framer-motion'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import React from 'react'
 
-import { navigationItems } from '~/config/nav'
+import { siteConfig } from '~/config/siteMetadata'
+
+const navigationItems = siteConfig.navigationItems
+
+const DropdownNavItem = ({
+  children,
+  href,
+}: {
+  children: React.ReactNode
+  href: string
+}) => (
+  <Menu>
+    <MenuButton className="">{children}</MenuButton>
+    <MenuItems
+      transition
+      anchor="bottom"
+      className="mt-4 max-w-52 origin-top-right rounded-xl border border-white/5 bg-white/5 p-1 text-sm/6 text-white transition duration-100 ease-out [--anchor-gap:var(--spacing-1)] focus:outline-none data-[closed]:scale-95 data-[closed]:opacity-0"
+    >
+      {siteConfig.moreItems[href] &&
+        siteConfig.moreItems[href].map((item) => (
+          <MenuItem key={item.href}>
+            <Link
+              className="group flex w-full items-center gap-2 rounded-lg px-3 py-1.5 data-[focus]:bg-white/10"
+              href={item.href}
+            >
+              {item.text}
+            </Link>
+          </MenuItem>
+        ))}
+    </MenuItems>
+  </Menu>
+)
 
 function NavItem({
   href,
+  isDropdown,
   children,
 }: {
   href: string
+  isDropdown?: boolean
   children: React.ReactNode
 }) {
   const isActive = usePathname() === href
-
+  const LinkWrapper = ({ children }: { children: React.ReactNode }) =>
+    isDropdown ? (
+      <DropdownNavItem href={href}>{children}</DropdownNavItem>
+    ) : (
+      <Link href={href}>{children}</Link>
+    )
   return (
-    <li>
-      <Link
-        href={href}
-        className={clsxm(
-          'relative block whitespace-nowrap px-3 py-2 transition',
-          isActive
-            ? 'text-lime-600 dark:text-lime-400'
-            : 'hover:text-lime-600 dark:hover:text-lime-400'
-        )}
-      >
+    <li
+      className={clsxm(
+        'relative block whitespace-nowrap px-3 py-2 transition',
+        isActive
+          ? 'text-lime-600 dark:text-lime-400'
+          : 'hover:text-lime-600 dark:hover:text-lime-400'
+      )}
+    >
+      <LinkWrapper>
         {children}
         {isActive && (
           <motion.span
@@ -36,7 +80,7 @@ function NavItem({
             layoutId="active-nav-item"
           />
         )}
-      </Link>
+      </LinkWrapper>
     </li>
   )
 }
@@ -81,7 +125,7 @@ function Desktop({
 
       <ul className="flex bg-transparent px-3 text-sm font-medium text-zinc-800 dark:text-zinc-200 ">
         {navigationItems.map(({ href, text }) => (
-          <NavItem key={href} href={href}>
+          <NavItem key={href} href={href} isDropdown={href === '/more'}>
             {text}
           </NavItem>
         ))}

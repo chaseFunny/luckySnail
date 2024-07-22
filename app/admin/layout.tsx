@@ -11,7 +11,8 @@ export default async function AdminLayout({
   children: React.ReactNode
 }) {
   const user = await currentUser()
-  if (!user || !user.publicMetadata.siteOwner) {
+  // || !user.publicMetadata.siteOwner
+  if (!user) {
     redirect('/')
   }
 

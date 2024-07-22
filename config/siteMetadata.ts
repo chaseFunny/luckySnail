@@ -96,8 +96,22 @@ const baseSiteConfig: SiteConfig = {
     { href: '/blog', text: '博客' },
     { href: '/projects', text: '项目' },
     { href: '/guestbook', text: '留言墙' },
-    { href: '/ama', text: 'AMA 咨询' },
+    // { href: '/ama', text: 'AMA 咨询' },
+    { href: '/about', text: '关于我' },
+    { href: '/more', text: '更多' },
   ],
+  moreItems: {
+    '/more': [
+      {
+        href: '/icon',
+        text: '图标库',
+      },
+      {
+        href: '/admin',
+        text: '管理',
+      },
+    ],
+  },
   footerItems: [{ href: '/', text: '首页' }],
   footerProducts: [
     { url: 'https://weijunext.com/', name: 'J实验室' },
